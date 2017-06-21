@@ -32,7 +32,6 @@ public class PointController : MonoBehaviour {
                 GameController.Instance.point[gameObj_No] = 1;
                 if (GameController.Instance.score == 88) {
                     GameController.Instance.score = 100;
-                    GameController.Instance.GameOver.SetActive(true);
                 } else
                     GameController.Instance.score += 11;
                 GameController.Instance.ScoreText.text = GameController.Instance.score.ToString();
