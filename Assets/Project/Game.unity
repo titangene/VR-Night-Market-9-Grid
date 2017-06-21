@@ -2527,7 +2527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 1280980490738504, guid: f2975c8b9daa28e4e9d3d97ea4cf773d, type: 2}
-  GameOver: {fileID: 0}
+  GameOver: {fileID: 1101483991}
   BallText: {fileID: 813381461}
   ScoreText: {fileID: 700293723}
   score: 0
