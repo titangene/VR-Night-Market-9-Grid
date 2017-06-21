@@ -9,8 +9,8 @@ public class BulletSpawn : MonoBehaviour {
     void Start() {
         GameController.Instance.score = 0;
         GameController.Instance.ball = 9;
-        GameController.Instance.BallText.text = "剩餘球數：" + GameController.Instance.ball.ToString();
-        GameController.Instance.ScoreText.text = "分數：" + GameController.Instance.score.ToString();
+        GameController.Instance.BallText.text = GameController.Instance.ball.ToString();
+        GameController.Instance.ScoreText.text = GameController.Instance.score.ToString();
     }
 
     void Update() {
@@ -19,7 +19,7 @@ public class BulletSpawn : MonoBehaviour {
             HitRB = obj.GetComponent<Rigidbody>();
             HitRB.velocity = Camera.main.transform.forward * Throw_Power;
             GameController.Instance.ball--;
-            GameController.Instance.BallText.text = "剩餘球數：" + GameController.Instance.ball.ToString();
+            GameController.Instance.BallText.text = GameController.Instance.ball.ToString();
         }
     }
 }
