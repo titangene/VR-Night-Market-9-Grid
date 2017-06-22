@@ -425,6 +425,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 208764367}
+--- !u!1 &302553986 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1678630067609526, guid: 46dbf147b7dfdc041a23bcc14ff50de9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1911731424}
 --- !u!1 &317971677
 GameObject:
   m_ObjectHideFlags: 0
@@ -2296,6 +2301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BallObj: {fileID: 1280980490738504, guid: f2975c8b9daa28e4e9d3d97ea4cf773d, type: 2}
   GameOverObj: {fileID: 1101483991}
+  GridGroupObj: {fileID: 302553986}
   GridObjs:
   - {fileID: 0}
   - {fileID: 0}

@@ -35,8 +35,11 @@ public class Grid {
 }
 
 public class GameController : Singleton<GameController> {
-    public GameObject BallObj, GameOverObj, GridGroupObj;
-    public GameObject[] GridObjs = new GameObject[9];
+    public GameObject BallObj, GameOverObj;
+    /// <summary>
+    /// 所有宮格物件
+    /// </summary>
+    private GameObject[] GridObjs = new GameObject[9];
     public Text BallText, ScoreText;
     public int score = 0;
     /// <summary>
@@ -56,6 +59,22 @@ public class GameController : Singleton<GameController> {
     /// </summary>
     public float gridRotationSpeed = 1.7f;
 
+    void Awake() {
+        Initial_Set_GridObjsToArray();
+    }
+
+    /// <summary>
+    /// 初始化設定所有宮格物件至 GridObjs 陣列
+    /// </summary>
+    private void Initial_Set_GridObjsToArray() {
+        // 找出所有有 "Grid" Tag 的物件
+        GameObject[] _GridObjs = GameObject.FindGameObjectsWithTag("Grid");
+        foreach (GameObject GridObj in _GridObjs) {
+            int girdID = get_GirdID(GridObj);
+            GridObjs[girdID] = GridObj;
+        }
+    }
+
     /// <summary>
     /// 重設遊戲：分數、球數、分數文字、球數文字、關閉 GameOver Panel
     /// </summary>
@@ -64,8 +83,8 @@ public class GameController : Singleton<GameController> {
         ball = 9;                       // 重設 球數
         Set_ScoreText();                // 重設 分數文字
         Set_BallText();                 // 重設 球數文字
-        ResetAllGrid();                // 重設 所有宮格的資訊
-        ResetAllGridObjRotation();     // 重設 所有宮格的角度
+        ResetAllGrid();                 // 重設 所有宮格的資訊
+        ResetAllGridObjRotation();      // 重設 所有宮格的角度
         Switch_GameOver_Panel(false);   // 關閉 GameOver Panel
         Debug.Log("ResetGame");
     }
@@ -74,10 +93,8 @@ public class GameController : Singleton<GameController> {
     /// 遊戲結束：沒球時，開啟 GameOver Panel
     /// </summary>
     public void GameOver() {
-        if (ball == 0) {
-            Switch_GameOver_Panel(true);
-            Debug.Log("GameOver");
-        }
+        Switch_GameOver_Panel(true);
+        Debug.Log("GameOver");
     }
 
     /// <summary>
@@ -86,6 +103,8 @@ public class GameController : Singleton<GameController> {
     public void UpdateBall() {
         ball--;             // 球數 - 1
         Set_BallText();     // 更新球數
+        if (ball == 0)      // 如果沒球時，延遲 2 秒後開啟 GameOver Panel
+            Invoke("GameOver", 2);
     }
 
     private void Set_BallText() {
@@ -137,6 +156,13 @@ public class GameController : Singleton<GameController> {
     /// </summary>
     public void Set_GridIsTurn(int grid_No, bool isTurn) {
         grid[grid_No].isTurn = isTurn;
+    }
+
+    /// <summary>
+    /// 取得 該宮格物件的編號，EX：原本叫 Grid5 -> 刪掉 "Grid" -> 取得 5
+    /// </summary>
+    public int get_GirdID(GameObject gameObj) {
+        return System.Int32.Parse(gameObj.name.Replace("Grid", "")) - 1;
     }
 
     /// <summary>

@@ -2,8 +2,8 @@
 using UnityEngine.UI;
 
 public class BallSpawn : MonoBehaviour {
-    public float Throw_Power = 8.0f;    // ran.Next(6, 12)
-    public System.Random ran = new System.Random();
+    public float Throw_Power = 8.0f;    // random.Next(6, 12)
+    public System.Random random = new System.Random();
     private Rigidbody HitRB;
     private Transform MainCamera;
 
