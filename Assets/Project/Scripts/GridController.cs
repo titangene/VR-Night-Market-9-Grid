@@ -3,77 +3,78 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PointController : MonoBehaviour {
+public class GridController : MonoBehaviour {
     /// <summary>
-    /// 九宮格內該格的編號
+    /// 該宮格的編號
     /// </summary>
-    private int pointObj_No;
+    private int gridObj_No;
+    
     /// <summary>
-    /// 九宮格內該格翻轉的角度 x: 90
+    /// 該宮格是否開始翻轉
     /// </summary>
-    private Quaternion point_Turn_Rotation = Quaternion.Euler(90, 0, 0);
-    /// <summary>
-    /// 九宮格內該格是否開始翻轉
-    /// </summary>
-    private bool isTurn = false;
+    //private bool isTurn = false;
     void Start () {
-        pointObj_No = Set_Point_No();
+        gridObj_No = Set_GridNo();
     }
 	
     /// <summary>
-    /// 九宮格內該格是否開始翻轉
+    /// 該宮格是否開始翻轉
     /// </summary>
 	void Update () {
-		TurnPoint();
+		TurnGrid();
 	}
-
-    /// <summary>
-    /// 設定 九宮格內該格的編號
-    /// </summary>
-    private int Set_Point_No() {
-        return pointObj_No = System.Int32.Parse(gameObject.name.Replace("Point", "")) - 1;
+    
+    private void OnTriggerEnter(Collider other) {
+        if (IsBall(other))
+            if (IsHitGrid())
+                HitGrid();
     }
 
     /// <summary>
-    /// 翻轉九宮格內的該格
+    /// 設定 該宮格的編號
     /// </summary>
-    private void TurnPoint() {
-        if (isTurn) {
-            if (transform.rotation.x > 80)
-                isTurn = false;     // 轉道 80 度時停止翻轉
-            else
-                // 平滑翻轉
-                transform.rotation = Quaternion.Lerp(transform.rotation, point_Turn_Rotation,
-                    Time.deltaTime * GameController.Instance.Point_Rotation_Speed);
+    private int Set_GridNo() {
+        // EX：原本叫 Grid5 -> 刪掉 Grid -> 取得 5
+        return gridObj_No = System.Int32.Parse(gameObject.name.Replace("Grid", "")) - 1;
+    }
+
+    /// <summary>
+    /// 翻轉該宮格
+    /// </summary>
+    private void TurnGrid() {
+        if (GameController.Instance.Get_GridIsTurn(gridObj_No)) {
+            if (transform.rotation.x > 80)  // 轉到 80 度時停止翻轉
+                GameController.Instance.Set_GridIsTurn(gridObj_No, false);
+            else    // 平滑翻轉到約 90 度
+                transform.rotation = Quaternion.Lerp(transform.rotation, 
+                    GameController.Instance.gridTurnRotation,
+                        Time.deltaTime * GameController.Instance.gridRotationSpeed);
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (IsBall(other))
-            if (IsHitPoint())   HitPoint();
-    }
-
     /// <summary>
-    /// 是否是球打中九宮格內的某格
+    /// 是否是球打中某宮格
     /// </summary>
     private bool IsBall(Collider other) {
-        return other.name == GameObject.FindWithTag("Ball").name;
+        return other.tag == "Ball";
     }
 
     /// <summary>
-    /// 是否打中九宮格內的某格
+    /// 是否打中某宮格
     /// </summary>
-    private bool IsHitPoint() {
-        return !GameController.Instance.pointStatus[pointObj_No];
+    private bool IsHitGrid() {
+        return !GameController.Instance.Get_GridIsHit(gridObj_No);
     }
 
     /// <summary>
-    /// 球打中九宮格內的某格時：翻轉九宮格內的該格 + 加分
+    /// 球打中某宮格時：翻轉該宮格 + 加分
     /// </summary>
-    private void HitPoint() {
-        isTurn = true;
-        print(gameObject.name);
-        GameController.Instance.Set_pointStatus(pointObj_No, true);
+    private void HitGrid() {
+        GameController.Instance.Set_GridIsTurn(gridObj_No, true);
+        GameController.Instance.Set_GridIsHit(gridObj_No, true);
         GameController.Instance.AddScore();
+        string log = System.String.Format("{0} - {1} - {2}", 
+            gameObject.name, GameController.Instance.ball, GameController.Instance.score);
+        Debug.Log(log);     // gridName - ball - score
     }
 }
