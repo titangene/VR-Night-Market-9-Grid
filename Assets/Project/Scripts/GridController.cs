@@ -65,8 +65,8 @@ public class GridController : MonoBehaviour {
         GameController.Instance.Set_GridIsTurn(gridObj_ID, true);
         GameController.Instance.Set_GridIsHit(gridObj_ID, true);
         GameController.Instance.AddScore();
-        string log = System.String.Format("{0} - {1} - {2}", 
-            gameObject.name, GameController.Instance.ball, GameController.Instance.score);
+        string log = System.String.Format("Grid{0} - {1} - {2}", 
+            gridObj_ID + 1, GameController.Instance.ball, GameController.Instance.score);
         Debug.Log(log);     // gridName - ball - score
     }
 }
