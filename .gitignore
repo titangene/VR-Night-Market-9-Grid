@@ -4,7 +4,7 @@
 /[Bb]uild/
 /[Bb]uilds/
 /Assets/AssetStoreTools*
-/Icon/
+/Other/
 
 # Visual Studio 2015 & Visual Studio Code cache directory
 /.vs/

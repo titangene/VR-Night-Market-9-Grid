@@ -26,7 +26,7 @@ public class GvrKeyboardVersion {
 
   [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
   public static void LogGvrKeyboardVersion() {
-    Debug.Log(VERSION_HEADER + GVR_KEYBOARD_VERSION);
+    //Debug.Log(VERSION_HEADER + GVR_KEYBOARD_VERSION);
   }
 #endif  // UNITY_ANDROID || UNITY_IOS
 }

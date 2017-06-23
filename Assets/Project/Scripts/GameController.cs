@@ -34,7 +34,7 @@ public class Grid {
     }
 }
 
-public class GameController : Singleton<GameController> {
+public class GameController : MonoBehaviour {
     public GameObject BallObj, GameOverObj;
     /// <summary>
     /// 所有宮格物件
@@ -59,7 +59,45 @@ public class GameController : Singleton<GameController> {
     /// </summary>
     public float gridRotationSpeed = 1.7f;
 
+    private static GameController instance = null;
+
+    public static GameController Instance {
+        get {
+#if UNITY_EDITOR
+            if (instance == null && !Application.isPlaying)
+                instance = FindObjectOfType<GameController>();
+#endif
+            if (instance == null) {
+                Debug.LogError("No GameController instance found.  Ensure one exists in the scene, or call "
+                    + "GameController.Create() at startup to generate one.\n"
+                    + "If one does exist but hasn't called Awake() yet, "
+                    + "then this error is due to order-of-initialization.\n"
+                    + "In that case, consider moving "
+                    + "your first reference to GameController.Instance to a later point in time.\n"
+                    + "If exiting the scene, this indicates that the GameController object has already "
+                    + "been destroyed.");
+            }
+            return instance;
+        }
+    }
+
+    public static void Create() {
+        if (instance == null && FindObjectOfType<GameController>() == null) {
+            Debug.Log("Creating GameController object");
+            var go = new GameObject("GameController", typeof(GameController));
+            go.transform.localPosition = Vector3.zero;
+            // sdk will be set by Awake().
+        }
+    }
+
     void Awake() {
+        if (instance == null)
+            instance = this;
+        if (instance != this) {
+            Debug.LogError("There must be only one GameController object in a scene.");
+            DestroyImmediate(this);
+            return;
+        }
         Initial_Set_GridObjsToArray();
     }
 
@@ -159,7 +197,7 @@ public class GameController : Singleton<GameController> {
     }
 
     /// <summary>
-    /// 取得 該宮格物件的編號，EX：原本叫 Grid5 -> 刪掉 "Grid" -> 取得 5
+    /// 取得 該宮格物件的編號，EX：原本叫 Grid5 -> 刪掉 "Grid" -> 取得 5 -> 5 - 1 = 4
     /// </summary>
     public int get_GirdID(GameObject gameObj) {
         return System.Int32.Parse(gameObj.name.Replace("Grid", "")) - 1;
@@ -181,5 +219,10 @@ public class GameController : Singleton<GameController> {
     private void ResetAllGridObjRotation() {
         foreach (GameObject GridObj in GridObjs)
             GridObj.transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    void OnDestroy() {
+        if (instance == this)
+            instance = null;
     }
 }

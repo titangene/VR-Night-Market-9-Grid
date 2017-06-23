@@ -26,7 +26,7 @@ public class GvrUnitySdkVersion {
 
   [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
   static void LogGvrUnitySdkVersion() {
-    Debug.Log(VERSION_HEADER + GVR_SDK_VERSION);
+    //Debug.Log(VERSION_HEADER + GVR_SDK_VERSION);
   }
 #endif  // UNITY_ANDROID || UNITY_IOS
 }
