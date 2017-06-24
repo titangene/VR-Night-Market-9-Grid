@@ -19,14 +19,13 @@ public class BallSpawn : MonoBehaviour {
     private Quaternion playerRotation;
 
     void Start() {
-        GameController.Instance.ResetGame();
         mainCamera = Camera.main.transform;
         playerPosition = transform.position;
         playerRotation = transform.rotation;
     }
 
     void Update() {
-        if (OnClick_And_hasBall()) {
+        if (CanThrowBall_And_hasBall_OnClickThrowBall()) {
             GenerateBall();
             ThrowBall();
             GameController.Instance.UpdateBall();
@@ -34,10 +33,11 @@ public class BallSpawn : MonoBehaviour {
     }
 
     /// <summary>
-    /// 按 Cardboard 按鈕時，如果還有剩球 : true
+    /// 如果可以投球 且 還有剩球時，按 Cardboard 按鈕 : true
     /// </summary>
-    private bool OnClick_And_hasBall() {
-        return GameController.Instance.ball > 0 && Input.GetMouseButtonDown(0);
+    private bool CanThrowBall_And_hasBall_OnClickThrowBall() {
+        return GameController.Instance.canThrowBall && GameController.Instance.ball > 0 && 
+            (Input.GetMouseButtonDown(0));
     }
 
     /// <summary>

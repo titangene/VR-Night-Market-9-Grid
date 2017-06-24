@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 1
-  minRandomAngle: 180
-  maxRandomAngle: 360
+  minRandomAngle: 50
+  maxRandomAngle: 270
 --- !u!135 &135818333702350034
 SphereCollider:
   m_ObjectHideFlags: 1

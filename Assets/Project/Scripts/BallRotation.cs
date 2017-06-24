@@ -12,7 +12,7 @@ public class BallRotation : MonoBehaviour {
     /// <summary>
     /// 最小亂數角度
     /// </summary>
-    public int minRandomAngle = 20;
+    public int minRandomAngle = 50;
     /// <summary>
     /// 最大亂數角度
     /// </summary>

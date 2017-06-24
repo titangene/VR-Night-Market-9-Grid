@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 碼表：紀錄每回合總投球時間
+/// </summary>
 public class Timer : MonoBehaviour {
     /// <summary>
-    /// 時間文字
+    /// 碼表時間文字
     /// </summary>
     public Text timerText;
     /// <summary>
@@ -33,17 +36,37 @@ public class Timer : MonoBehaviour {
             t_ms = Mathf.Floor((timer * 100) % 100);    // get millisec
             // 70.55s -> 01:10:55
             t_str = string.Format("{0:00}:{1:00}:{2:00}", t_min, t_sec, t_ms);
-            timerText.text = t_str;     // 更新時間文字
+            Set_TimerText(t_str);       // 更新時間文字
         }
     }
 
+    /// <summary>
+    /// 開始記錄該回合總投球時間
+    /// </summary>
     public void StartTimer() {
-        timer = 0f;                     // 重設 開始時間
-        timerText.text = "00:00:00";    // 重設 時間文字
+        ResetTimer();
         isTimerRun = true;
     }
 
+    /// <summary>
+    /// 停止記錄該回合總投球時間
+    /// </summary>
     public void StopTimer() {
         isTimerRun = false;
+    }
+
+    /// <summary>
+    /// 重設 碼表：紀錄每回合總投球時間
+    /// </summary>
+    public void ResetTimer() {
+        timer = 0f;                     // 重設 開始時間
+        timerText.text = "00:00:00";    // 重設 時間文字
+    }
+
+    /// <summary>
+    /// 設定 碼表時間文字
+    /// </summary>
+    public void Set_TimerText(string str) {
+        timerText.text = str;
     }
 }

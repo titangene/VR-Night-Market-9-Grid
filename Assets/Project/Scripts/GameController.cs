@@ -57,10 +57,21 @@ public class GameController : MonoBehaviour {
     /// </summary>
     public float gridRotationSpeed = 1.7f;
     /// <summary>
+    /// 是否可以投球
+    /// </summary>
+    public bool canThrowBall = false;
+    /// <summary>
+    /// 亂數
+    /// </summary>
+    public RandomController randomCtrl = new RandomController();
+    /// <summary>
+    /// 準備時間："預備、3、2、1、GO!!"
+    /// </summary>
+    private PrepareTimer prepareTimer;
+    /// <summary>
     /// 碼表：紀錄每回合總投球時間
     /// </summary>
     private Timer timer;
-    public RandomController randomCtrl = new RandomController();
 
     private static GameController instance = null;
 
@@ -102,7 +113,12 @@ public class GameController : MonoBehaviour {
             return;
         }
         Initial_Set_GridObjsToArray();
-        timer = GameObject.FindWithTag("Timer").GetComponent<Timer>();
+        prepareTimer = gameObject.GetComponent<PrepareTimer>();
+        timer = gameObject.GetComponent<Timer>();
+    }
+
+    void Start() {
+        ResetGame();
     }
 
     /// <summary>
@@ -118,9 +134,17 @@ public class GameController : MonoBehaviour {
     }
 
     /// <summary>
+    /// 開始遊戲：可開始投球
+    /// </summary>
+    public void StartGame() {
+        canThrowBall = true;
+    }
+
+    /// <summary>
     /// 重設遊戲：分數、球數、分數文字、球數文字、關閉 GameOver Panel
     /// </summary>
     public void ResetGame() {
+        canThrowBall = false;            // 設定 不可投球
         score = 0;                      // 重設 分數
         ball = 9;                       // 重設 球數
         Set_ScoreText();                // 重設 分數文字
@@ -128,7 +152,8 @@ public class GameController : MonoBehaviour {
         ResetAllGrid();                 // 重設 所有宮格的資訊
         ResetAllGridObjRotation();      // 重設 所有宮格的角度
         Switch_GameOver_Panel(false);   // 關閉 GameOver Panel
-        timer.StartTimer();
+        timer.ResetTimer();             // 重設 碼表：紀錄每回合總投球時間
+        StartCoroutine(prepareTimer.Start_PrepareTimer());  // 開始準備時間
         Debug.Log("ResetGame");
     }
 
