@@ -1,31 +1,57 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class BallSpawn : MonoBehaviour {
-    public float Throw_Power = 8.0f;    // random.Next(6, 12)
-    public System.Random random = new System.Random();
-    private Rigidbody HitRB;
-    private Transform MainCamera;
+    /// <summary>
+    /// 球速
+    /// </summary>
+    public float throw_Power = 8.0f;    // GameController.Instance.randomCtrl.GetRandom(6, 12);
+
+    private GameObject ball_Obj;
+    private Rigidbody ball_RB;
+    private Transform mainCamera;
+    /// <summary>
+    /// 玩家位置
+    /// </summary>
+    private Vector3 playerPosition;
+    /// <summary>
+    /// 玩家角度
+    /// </summary>
+    private Quaternion playerRotation;
 
     void Start() {
         GameController.Instance.ResetGame();
-        MainCamera = Camera.main.transform;
+        mainCamera = Camera.main.transform;
+        playerPosition = transform.position;
+        playerRotation = transform.rotation;
     }
 
     void Update() {
-        ShootBall();
+        if (OnClick_And_hasBall()) {
+            GenerateBall();
+            ThrowBall();
+            GameController.Instance.UpdateBall();
+        }
     }
 
     /// <summary>
-    /// 發射子彈
+    /// 按 Cardboard 按鈕時，如果還有剩球 : true
     /// </summary>
-    void ShootBall() {
-        // 按 Cardboard 按鈕時，如果還有剩球 -> 發射球
-        if (GameController.Instance.ball > 0 && Input.GetMouseButtonDown(0)) {
-            GameObject BallObj = Instantiate(GameController.Instance.BallObj, transform.position, transform.rotation);
-            HitRB = BallObj.GetComponent<Rigidbody>();
-            HitRB.velocity = MainCamera.forward * Throw_Power;
-            GameController.Instance.UpdateBall();
-        }
+    private bool OnClick_And_hasBall() {
+        return GameController.Instance.ball > 0 && Input.GetMouseButtonDown(0);
+    }
+
+    /// <summary>
+    /// 產生球
+    /// </summary>
+    private void GenerateBall() {
+        ball_Obj = Instantiate(GameController.Instance.BallObj, playerPosition, playerRotation);
+    }
+
+    /// <summary>
+    /// 投球
+    /// </summary>
+    private void ThrowBall() {
+        ball_RB = ball_Obj.GetComponent<Rigidbody>();
+        ball_RB.velocity = mainCamera.forward * throw_Power;
     }
 }

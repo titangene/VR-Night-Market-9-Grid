@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// Reference: http://wiki.unity3d.com/index.php/Singleton
+using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
     private static T _instance;

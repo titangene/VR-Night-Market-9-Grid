@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
@@ -58,8 +56,11 @@ public class GameController : MonoBehaviour {
     /// 宮格被球丟到後，翻轉的速度
     /// </summary>
     public float gridRotationSpeed = 1.7f;
-
+    /// <summary>
+    /// 碼表：紀錄每回合總投球時間
+    /// </summary>
     private Timer timer;
+    public RandomController randomCtrl = new RandomController();
 
     private static GameController instance = null;
 

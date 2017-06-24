@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
     /// <summary>
-    /// 遊戲時間文字
+    /// 時間文字
     /// </summary>
     public Text timerText;
     /// <summary>
@@ -38,8 +38,8 @@ public class Timer : MonoBehaviour {
     }
 
     public void StartTimer() {
-        timer = 0f;
-        timerText.text = "00:00:00";
+        timer = 0f;                     // 重設 開始時間
+        timerText.text = "00:00:00";    // 重設 時間文字
         isTimerRun = true;
     }
 
