@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ball
   - Grid
+  - Point
+  - Timer
   layers:
   - Default
   - TransparentFX

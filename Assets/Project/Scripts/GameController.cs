@@ -59,6 +59,8 @@ public class GameController : MonoBehaviour {
     /// </summary>
     public float gridRotationSpeed = 1.7f;
 
+    private Timer timer;
+
     private static GameController instance = null;
 
     public static GameController Instance {
@@ -99,6 +101,7 @@ public class GameController : MonoBehaviour {
             return;
         }
         Initial_Set_GridObjsToArray();
+        timer = GameObject.FindWithTag("Timer").GetComponent<Timer>();
     }
 
     /// <summary>
@@ -124,6 +127,7 @@ public class GameController : MonoBehaviour {
         ResetAllGrid();                 // 重設 所有宮格的資訊
         ResetAllGridObjRotation();      // 重設 所有宮格的角度
         Switch_GameOver_Panel(false);   // 關閉 GameOver Panel
+        timer.StartTimer();
         Debug.Log("ResetGame");
     }
 
@@ -131,6 +135,7 @@ public class GameController : MonoBehaviour {
     /// 遊戲結束：沒球時，開啟 GameOver Panel
     /// </summary>
     public void GameOver() {
+        timer.StopTimer();
         Switch_GameOver_Panel(true);
         Debug.Log("GameOver");
     }
