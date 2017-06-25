@@ -37,7 +37,11 @@ namespace Gvr.Internal {
     }
     private static EmulatorConfig instance = null;
 
-    public enum Mode {
+        void Awake() {
+            DontDestroyOnLoad(gameObject);
+        }
+
+        public enum Mode {
       OFF,
       USB,
       WIFI,
