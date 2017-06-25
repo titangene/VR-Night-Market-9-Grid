@@ -100,7 +100,7 @@ public class GameController : MonoBehaviour {
     /// <summary>
     /// 碼表：紀錄每回合總投球時間
     /// </summary>
-    private Timer timer;
+    public Timer timer;
     
     /// <summary>
     /// 所有球的狀態：無、空中、打中、沒中
@@ -202,7 +202,7 @@ public class GameController : MonoBehaviour {
     /// 遊戲結束：沒球時，開啟 GameOver Panel
     /// </summary>
     public void GameOver() {
-        timer.StopTimer();              // 停止記錄該回合總投球時間
+        
         Switch_GameOver_Panel(true);    // 開啟 GameOver Panel
         Debug.Log("GameOver");
     }

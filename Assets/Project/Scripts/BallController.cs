@@ -36,6 +36,9 @@ public class BallController : MonoBehaviour {
                 log = System.String.Format("Ball{0} : {1} - 剩 {2} 球 - {3} 分", (ballID + 1),
                 other.name, GameController.Instance._ball, GameController.Instance.score);
                 Debug.Log(log);     // gridName - ball - score
+
+                if (GameController.Instance._ball == 0)
+                    GameController.Instance.timer.StopTimer();      // 停止記錄該回合總投球時間
             }
         }
     }
@@ -52,6 +55,9 @@ public class BallController : MonoBehaviour {
                 log = System.String.Format("Ball{0} : Lose  - 剩 {1} 球",
                     ballID + 1, GameController.Instance._ball);
                 Debug.Log(log);
+
+                if (GameController.Instance._ball == 0)
+                    GameController.Instance.timer.StopTimer();      // 停止記錄該回合總投球時間
             }
             Destroy(gameObject);  // 刪除超過範圍的球
         }
