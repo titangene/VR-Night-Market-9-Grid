@@ -1,18 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
+/// <summary>
+/// 球打中某宮格時：翻轉該宮格 + 加分
+/// </summary>
 public class GridController : MonoBehaviour {
     /// <summary>
     /// 該宮格的編號
     /// </summary>
     private int gridObj_ID;
     
-    /// <summary>
-    /// 該宮格是否開始翻轉
-    /// </summary>
-    //private bool isTurn = false;
     void Start () {
         gridObj_ID = GameController.Instance.get_GirdID(gameObject);
     }
@@ -27,7 +23,7 @@ public class GridController : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (IsBall(other))
             if (IsHitGrid())
-                HitGrid();
+                HitGrid(other);
     }
 
     /// <summary>
@@ -61,12 +57,13 @@ public class GridController : MonoBehaviour {
     /// <summary>
     /// 球打中某宮格時：翻轉該宮格 + 加分
     /// </summary>
-    private void HitGrid() {
+    private void HitGrid(Collider other) {
+        Close_BallCollider(other);
         GameController.Instance.Set_GridIsTurn(gridObj_ID, true);
-        GameController.Instance.Set_GridIsHit(gridObj_ID, true);
         GameController.Instance.AddScore();
-        string log = System.String.Format("Grid{0} - {1} - {2}", 
-            gridObj_ID + 1, GameController.Instance.ball, GameController.Instance.score);
-        Debug.Log(log);     // gridName - ball - score
+    }
+
+    private void Close_BallCollider(Collider other) {
+        other.GetComponent<Collider>().enabled = true;
     }
 }

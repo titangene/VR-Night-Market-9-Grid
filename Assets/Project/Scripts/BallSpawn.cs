@@ -36,8 +36,8 @@ public class BallSpawn : MonoBehaviour {
     /// 如果可以投球 且 還有剩球時，按 Cardboard 按鈕 : true
     /// </summary>
     private bool CanThrowBall_And_hasBall_OnClickThrowBall() {
-        return GameController.Instance.canThrowBall && GameController.Instance.ball > 0 && 
-            (Input.GetMouseButtonDown(0));
+        return (GameController.Instance.canThrowBall && GameController.Instance.ball > 0) && 
+            Input.GetMouseButtonDown(0);
     }
 
     /// <summary>
@@ -45,6 +45,7 @@ public class BallSpawn : MonoBehaviour {
     /// </summary>
     private void GenerateBall() {
         ball_Obj = Instantiate(GameController.Instance.BallObj, playerPosition, playerRotation);
+        ball_Obj.name = GameController.Instance.Set_BallID();
     }
 
     /// <summary>

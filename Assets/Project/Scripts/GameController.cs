@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.ComponentModel;
+using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
@@ -32,6 +33,28 @@ public class Grid {
     }
 }
 
+/// <summary>
+/// 球的狀態：無、空中、打中、沒中
+/// </summary>
+public enum BallStatus {
+    /// <summary>
+    /// 無
+    /// </summary>
+    None,
+    /// <summary>
+    /// 空中
+    /// </summary>
+    Mid_air,
+    /// <summary>
+    /// 打中
+    /// </summary>
+    Hit,
+    /// <summary>
+    /// 沒中
+    /// </summary>
+    Lose
+}
+
 public class GameController : MonoBehaviour {
     public GameObject BallObj, GameOverObj;
     /// <summary>
@@ -44,6 +67,12 @@ public class GameController : MonoBehaviour {
     /// 球數
     /// </summary>
     public int ball = 9;
+    /// <summary>
+    /// 球數 (延遲版，Debug.Log 用)：原本的 ball 變數是在投球瞬間就立即更新，
+    /// 當快速投出多顆球 並 Debug.Log(ball) 時，就會造成列印出已更新的剩餘球數
+    /// EX：目前剩餘 9 顆球，快速投出 2 顆球且 2 顆都打中宮格時，都會列印出剩餘 7 顆球
+    /// </summary>
+    public int _ball = 9;
     /// <summary>
     /// 宮格的資訊：是否被丟中 (isHit)、是否已翻轉 (isTurn)
     /// </summary>
@@ -72,6 +101,15 @@ public class GameController : MonoBehaviour {
     /// 碼表：紀錄每回合總投球時間
     /// </summary>
     private Timer timer;
+    
+    /// <summary>
+    /// 所有球的狀態：無、空中、打中、沒中
+    /// </summary>
+    public BallStatus[] balls = new BallStatus[9];
+    /// <summary>
+    /// 投出第幾顆球
+    /// </summary>
+    public int ball_Count = 0;
 
     private static GameController instance = null;
 
@@ -144,13 +182,16 @@ public class GameController : MonoBehaviour {
     /// 重設遊戲：分數、球數、分數文字、球數文字、關閉 GameOver Panel
     /// </summary>
     public void ResetGame() {
-        canThrowBall = false;            // 設定 不可投球
+        canThrowBall = false;           // 設定 不可投球
         score = 0;                      // 重設 分數
         ball = 9;                       // 重設 球數
+        _ball = 9;                      // 重設 球數 (延遲版)
+        ball_Count = 0;                 // 重設 投出第幾顆球
         Set_ScoreText();                // 重設 分數文字
         Set_BallText();                 // 重設 球數文字
-        ResetAllGrid();                 // 重設 所有宮格的資訊
-        ResetAllGridObjRotation();      // 重設 所有宮格的角度
+        ResetAllGrid();                 // 重設 所有宮格的資訊：未被丟中 (isHit)、未翻轉 (isTurn)
+        ResetAllGridObjRotation();      // 重設 所有宮格的角度：x, y, z = (0, 0, 0)
+        ResetAllBallStatus();           // 重設 所有球的狀態：無
         Switch_GameOver_Panel(false);   // 關閉 GameOver Panel
         timer.ResetTimer();             // 重設 碼表：紀錄每回合總投球時間
         StartCoroutine(prepareTimer.Start_PrepareTimer());  // 開始準備時間
@@ -161,18 +202,20 @@ public class GameController : MonoBehaviour {
     /// 遊戲結束：沒球時，開啟 GameOver Panel
     /// </summary>
     public void GameOver() {
-        timer.StopTimer();
-        Switch_GameOver_Panel(true);
+        timer.StopTimer();              // 停止記錄該回合總投球時間
+        Switch_GameOver_Panel(true);    // 開啟 GameOver Panel
         Debug.Log("GameOver");
     }
 
     /// <summary>
-    /// 更新 球數
+    /// 更新 球數 + 設定 球的狀態：空中
     /// </summary>
     public void UpdateBall() {
-        ball--;             // 球數 - 1
-        Set_BallText();     // 更新球數
-        if (ball == 0)      // 如果沒球時，延遲 2 秒後開啟 GameOver Panel
+        Set_BallStatus_To_Mid_air();    // 設定 球的狀態：空中
+        ball--;                         // 球數 - 1
+        ball_Count++;                   // 投出第幾顆球 + 1
+        Set_BallText();                 // 更新球數
+        if (ball == 0)                  // 如果沒球時，延遲 2 秒後開啟 GameOver Panel
             Invoke("GameOver", 2);
     }
 
@@ -230,18 +273,68 @@ public class GameController : MonoBehaviour {
     /// <summary>
     /// 取得 該宮格物件的編號，EX：原本叫 Grid5 -> 刪掉 "Grid" -> 取得 5 -> 5 - 1 = 4
     /// </summary>
-    public int get_GirdID(GameObject gameObj) {
-        return System.Int32.Parse(gameObj.name.Replace("Grid", "")) - 1;
+    public int get_GirdID(GameObject GridGameObj) {
+        return System.Int32.Parse(GridGameObj.name.Replace("Grid", "")) - 1;
     }
 
     /// <summary>
-    /// 重設 所有宮格的資訊：是否被丟中 (isHit)、是否已翻轉 (isTurn)
+    /// 設定 該球物件的編號
+    /// </summary>
+    /// <returns></returns>
+    public string Set_BallID() {
+        return "Ball(Clone)_" + (ball_Count + 1);
+    }
+
+    /// <summary>
+    /// 取得 該球物件的編號，EX：原本叫 Ball(Clone)_5 -> 刪掉 "Ball(Clone)_" -> 取得 5 -> 5 - 1 = 4
+    /// </summary>
+    public int get_BallID(GameObject BallGameObj) {
+        return System.Int32.Parse(BallGameObj.name.Replace("Ball(Clone)_", "")) - 1;
+    }
+
+    /// <summary>
+    /// 設定 球的狀態：空中
+    /// </summary>
+    public void Set_BallStatus_To_Mid_air() {
+        balls[ball_Count] = BallStatus.Mid_air;
+    }
+
+    /// <summary>
+    /// 設定 球的狀態：打中
+    /// </summary>
+    public void Set_BallStatus_To_Hit(int id) {
+        balls[id] = BallStatus.Hit;
+    }
+
+    /// <summary>
+    /// 設定 球的狀態：沒中
+    /// </summary>
+    public void Set_BallStatus_To_Lose(int id) {
+        balls[id] = BallStatus.Lose;
+    }
+
+    /// <summary>
+    /// 球的狀態是否等於某狀態
+    /// </summary>
+    public bool Equal_BallStatus(int id, BallStatus ball) {
+        return balls[id] == ball;
+    }
+
+    /// <summary>
+    /// 重設 所有球的狀態：無
+    /// </summary>
+    private void ResetAllBallStatus() {
+        for (int i = 0; i < ball; ++i)
+            balls[i] = BallStatus.None;
+    }
+
+    /// <summary>
+    /// 重設 所有宮格的資訊：未被丟中 (isHit)、未翻轉 (isTurn)
     /// </summary>
     private void ResetAllGrid() {
         grid = new Grid[9];
-        for(int i = 0; i < ball; ++i) {
+        for(int i = 0; i < ball; ++i)
             grid[i] = new Grid(false, false);
-        }
     }
 
     /// <summary>

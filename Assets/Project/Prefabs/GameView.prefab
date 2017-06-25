@@ -38,10 +38,9 @@ GameObject:
   - component: {fileID: 4671367026831868}
   - component: {fileID: 33395352184187958}
   - component: {fileID: 65215069144769948}
-  - component: {fileID: 114195502464290652}
   m_Layer: 0
-  m_Name: BallDestory_Back
-  m_TagString: Untagged
+  m_Name: BallOutRange_Back
+  m_TagString: OutRange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,10 +123,9 @@ GameObject:
   - component: {fileID: 4766173080051462}
   - component: {fileID: 33633068993513700}
   - component: {fileID: 65435654529205180}
-  - component: {fileID: 114206637988920796}
   m_Layer: 0
-  m_Name: BallDestory_Bottom
-  m_TagString: Untagged
+  m_Name: BallOutRange_Bottom
+  m_TagString: OutRange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -327,10 +325,9 @@ GameObject:
   - component: {fileID: 4463810012555816}
   - component: {fileID: 33479935112797216}
   - component: {fileID: 65566653742071860}
-  - component: {fileID: 114698167864428806}
   m_Layer: 0
-  m_Name: BallDestory_Left
-  m_TagString: Untagged
+  m_Name: BallOutRange_Left
+  m_TagString: OutRange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -411,10 +408,9 @@ GameObject:
   - component: {fileID: 4729605191557350}
   - component: {fileID: 33486506532017272}
   - component: {fileID: 65283206107028002}
-  - component: {fileID: 114202634050033072}
   m_Layer: 0
-  m_Name: BallDestory_Front
-  m_TagString: Untagged
+  m_Name: BallOutRange_Front
+  m_TagString: OutRange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -428,7 +424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4746502601357574}
   m_Layer: 5
-  m_Name: BallDestoryGroup
+  m_Name: BallOutRangeGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -477,10 +473,9 @@ GameObject:
   - component: {fileID: 4852092596181134}
   - component: {fileID: 33489485401508632}
   - component: {fileID: 65135395234707036}
-  - component: {fileID: 114617217133632108}
   m_Layer: 0
-  m_Name: BallDestory_Right
-  m_TagString: Untagged
+  m_Name: BallOutRange_Right
+  m_TagString: OutRange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -512,10 +507,9 @@ GameObject:
   - component: {fileID: 4681573464092794}
   - component: {fileID: 33504959731251542}
   - component: {fileID: 65301410560158250}
-  - component: {fileID: 114136225586834014}
   m_Layer: 0
-  m_Name: BallDestory_Top
-  m_TagString: Untagged
+  m_Name: BallOutRange_Top
+  m_TagString: OutRange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -681,7 +675,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1898367218577150}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -693,7 +687,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1027584232060726}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -705,7 +699,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1777670805213594}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -717,7 +711,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1999171579357346}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -729,7 +723,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1167828526933680}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -741,7 +735,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1624158858780652}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -812,17 +806,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Restart
---- !u!114 &114136225586834014
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1999171579357346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c9ed8bfd6bacf84cba21ed4e8b941ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114160027029910266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -856,39 +839,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Home
---- !u!114 &114195502464290652
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1027584232060726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c9ed8bfd6bacf84cba21ed4e8b941ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114202634050033072
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1777670805213594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c9ed8bfd6bacf84cba21ed4e8b941ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114206637988920796
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1167828526933680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c9ed8bfd6bacf84cba21ed4e8b941ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114353103478157922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1139,17 +1089,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &114617217133632108
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1898367218577150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c9ed8bfd6bacf84cba21ed4e8b941ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114636953975341734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1236,17 +1175,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1.15
   m_Text: "VR Night Market 9 Grid\n( VR \u591C\u5E02\u4E5D\u5BAE\u683C )"
---- !u!114 &114698167864428806
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1624158858780652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c9ed8bfd6bacf84cba21ed4e8b941ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114742357314317378
 MonoBehaviour:
   m_ObjectHideFlags: 1
