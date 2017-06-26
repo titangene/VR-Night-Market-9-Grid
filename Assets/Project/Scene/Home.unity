@@ -210,6 +210,16 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2024583655}
+    - target: {fileID: 1759002040908280, guid: 769830656c432c1479992f2b6a60c8ff, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025728816303134, guid: 769830656c432c1479992f2b6a60c8ff,
+        type: 2}
+      propertyPath: m_Text
+      value: "\u5357\u81FA\u79D1\u6280\u5927\u5B78  \u8CC7\u7BA1\u7CFB\n\r\u90ED\u67CF\u5747
+        \ \u66FE\u5955\u52F3\n\r\u6731\u51F0\u699C  \u859B\u66FC\u8FB0  \u97D3\u946B\n\u88FD\u4F5C\u6642\u9593\uFF1A2017/06"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 769830656c432c1479992f2b6a60c8ff, type: 2}
   m_IsPrefabParent: 0

@@ -4,7 +4,7 @@ public class BallSpawn : MonoBehaviour {
     /// <summary>
     /// 球速
     /// </summary>
-    public float throw_Power = 8.0f;    // GameController.Instance.randomCtrl.GetRandom(6, 12);
+    public float throw_Power = 8.0f;
 
     private GameObject ball_Obj;
     private Rigidbody ball_RB;
@@ -22,6 +22,7 @@ public class BallSpawn : MonoBehaviour {
         mainCamera = Camera.main.transform;
         playerPosition = transform.position;
         playerRotation = transform.rotation;
+        throw_Power = GameController.Instance.randomCtrl.GetRandom(6, 12);
     }
 
     void Update() {
