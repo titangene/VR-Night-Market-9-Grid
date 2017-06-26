@@ -202,7 +202,6 @@ public class GameController : MonoBehaviour {
     /// 遊戲結束：沒球時，開啟 GameOver Panel
     /// </summary>
     public void GameOver() {
-        
         Switch_GameOver_Panel(true);    // 開啟 GameOver Panel
         Debug.Log("GameOver");
     }

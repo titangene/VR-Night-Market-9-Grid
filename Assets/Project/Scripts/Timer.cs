@@ -53,6 +53,7 @@ public class Timer : MonoBehaviour {
     /// </summary>
     public void StopTimer() {
         isTimerRun = false;
+        Debug.Log("time : " + t_str);
     }
 
     /// <summary>

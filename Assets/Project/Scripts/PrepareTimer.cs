@@ -48,6 +48,7 @@ public class PrepareTimer : MonoBehaviour {
 
         yield return new WaitForSeconds(2);
         Switch_PrepareTimerObj(false);
+        Debug.Log("StartGame");
         timer.StartTimer();                     // 開始記錄該回合總投球時間
         GameController.Instance.StartGame();    // 開始遊戲：可開始投球
 
