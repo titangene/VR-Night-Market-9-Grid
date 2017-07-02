@@ -22,7 +22,7 @@ public class BallSpawn : MonoBehaviour {
         mainCamera = Camera.main.transform;
         playerPosition = transform.position;
         playerRotation = transform.rotation;
-        throw_Power = GameController.Instance.randomCtrl.GetRandom(6, 12);
+        GameController.Instance.randomCtrl.GeneratorRandom();
     }
 
     void Update() {
@@ -54,6 +54,7 @@ public class BallSpawn : MonoBehaviour {
     /// </summary>
     private void ThrowBall() {
         ball_RB = ball_Obj.GetComponent<Rigidbody>();
+        throw_Power = GameController.Instance.randomCtrl.GetRandom(6, 12);
         ball_RB.velocity = mainCamera.forward * throw_Power;
     }
 }

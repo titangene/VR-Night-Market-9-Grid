@@ -20,10 +20,9 @@ public class GridController : MonoBehaviour {
 		TurnGrid();
 	}
     
-    private void OnTriggerEnter(Collider other) {
-        if (IsBall(other))
-            if (IsHitGrid())
-                HitGrid(other);
+    private void OnCollisionEnter(Collision collision) {
+        if (IsBall(collision))
+            HitGrid(collision);
     }
 
     /// <summary>
@@ -43,8 +42,8 @@ public class GridController : MonoBehaviour {
     /// <summary>
     /// 是否是球打中某宮格
     /// </summary>
-    private bool IsBall(Collider other) {
-        return other.tag == "Ball";
+    private bool IsBall(Collision collision) {
+        return collision.gameObject.tag == "Ball";
     }
 
     /// <summary>
@@ -57,13 +56,8 @@ public class GridController : MonoBehaviour {
     /// <summary>
     /// 球打中某宮格時：翻轉該宮格 + 加分
     /// </summary>
-    private void HitGrid(Collider other) {
-        Close_BallCollider(other);
+    private void HitGrid(Collision collision) {
         GameController.Instance.Set_GridIsTurn(gridObj_ID, true);
         GameController.Instance.AddScore();
-    }
-
-    private void Close_BallCollider(Collider other) {
-        other.GetComponent<Collider>().enabled = true;
     }
 }

@@ -23,7 +23,6 @@ public class BallRotation : MonoBehaviour {
 
     void Awake () {
         ball_RB = gameObject.GetComponent<Rigidbody>();
-        GameController.Instance.randomCtrl.GeneratorRandom();
         rotationAngle = new Vector3(GetRandom(), GetRandom(), GetRandom());
     }
 

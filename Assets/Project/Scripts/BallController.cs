@@ -20,23 +20,23 @@ public class BallController : MonoBehaviour {
         ballID = GameController.Instance.get_BallID(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other) {
-        BallIsHit_Grid(other);
-        BallIsHit_OutRange(other);
+    private void OnCollisionEnter(Collision collision) {
+        BallIsHit_Grid(collision);
+        BallIsHit_OutRange(collision);
     }
 
     /// <summary>
     /// 球打中某宮格：print log
     /// </summary>
-    private void BallIsHit_Grid(Collider other) {
-        if (IsGrid_CheckTag(other)) {
-            if (GridHasBeenHit(other) && Equal_BallStatus(BallStatus.Mid_air)) {
+    private void BallIsHit_Grid(Collision collision) {
+        if (IsGrid_CheckTag(collision)) {
+            if (GridHasBeenHit(collision) && Equal_BallStatus(BallStatus.Mid_air)) {
                 GameController.Instance.Set_GridIsHit(gridObj_ID, true);
                 GameController.Instance._ball--;    // 更新球數 (延遲版)
                 GameController.Instance.Set_BallStatus_To_Hit(ballID);
 
                 log = System.String.Format("Ball{0} : {1} - 剩 {2} 球 - {3} 分", (ballID + 1),
-                    other.name, GameController.Instance._ball, GameController.Instance.score);
+                    collision.gameObject.name, GameController.Instance._ball, GameController.Instance.score);
                 Debug.Log(log);     // ballID : gridID - ball - score
 
                 if (GameController.Instance._ball == 0)             // 最後一顆球 Lose 時
@@ -48,8 +48,8 @@ public class BallController : MonoBehaviour {
     /// <summary>
     /// 球是否超過範圍
     /// </summary>
-    private void BallIsHit_OutRange(Collider other) {
-        if (IsOutRange_CheckTag(other)) {
+    private void BallIsHit_OutRange(Collision collision) {
+        if (IsOutRange_CheckTag(collision)) {
             if (!Equal_BallStatus(BallStatus.Hit)) {
                 GameController.Instance._ball--;    // 更新球數 (延遲版)
                 GameController.Instance.Set_BallStatus_To_Lose(ballID);
@@ -68,22 +68,22 @@ public class BallController : MonoBehaviour {
     /// <summary>
     /// 球是否打中某宮格 (檢查 Tag)
     /// </summary>
-    private bool IsGrid_CheckTag(Collider other) {
-        return other.tag == gridTag;
+    private bool IsGrid_CheckTag(Collision collision) {
+        return collision.gameObject.tag == gridTag;
     }
 
     /// <summary>
     /// 球是否超過範圍 (檢查 Tag)
     /// </summary>
-    private bool IsOutRange_CheckTag(Collider other) {
-        return other.tag == outRangeTag;
+    private bool IsOutRange_CheckTag(Collision collision) {
+        return collision.gameObject.tag == outRangeTag;
     }
 
     /// <summary>
     /// 此宮格是否已被打中
     /// </summary>
-    private bool GridHasBeenHit(Collider other) {
-        gridObj_ID = GameController.Instance.get_GirdID(other.gameObject);
+    private bool GridHasBeenHit(Collision collision) {
+        gridObj_ID = GameController.Instance.get_GirdID(collision.gameObject);
         return !GameController.Instance.Get_GridIsHit(gridObj_ID);
     }
 

@@ -9,6 +9,7 @@ TagManager:
   - Point
   - Timer
   - OutRange
+  - Frame
   layers:
   - Default
   - TransparentFX
