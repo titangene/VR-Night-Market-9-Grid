@@ -1,59 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// 宮格的資訊：是否被丟中 (isHit)、是否已翻轉 (isTurn)
-/// </summary>
-public class Grid {
-    private bool _isHit = false;
-    private bool _isTurn = false;
-    /// <summary>
-    /// 初始化設定 宮格的資訊：是否被丟中 (isHit)、是否已翻轉 (isTurn)
-    /// </summary>
-    public Grid(bool isHit, bool isTurn) {
-        _isHit = isHit;
-        _isTurn = isTurn;
-    }
-
-    /// <summary>
-    /// 宮格是否被丟中
-    /// </summary>
-    public bool isHit {
-        get { return _isHit; }
-        set { _isHit = value; }
-    }
-
-    /// <summary>
-    /// 宮格是否已翻轉
-    /// </summary>
-    public bool isTurn {
-        get { return _isTurn; }
-        set { _isTurn = value; }
-    }
-}
-
-/// <summary>
-/// 球的狀態：無、空中、打中、沒中
-/// </summary>
-public enum BallStatus {
-    /// <summary>
-    /// 無
-    /// </summary>
-    None,
-    /// <summary>
-    /// 空中
-    /// </summary>
-    Mid_air,
-    /// <summary>
-    /// 打中
-    /// </summary>
-    Hit,
-    /// <summary>
-    /// 沒中
-    /// </summary>
-    Lose
-}
-
 public class GameController : MonoBehaviour {
     public GameObject BallObj, GameOverObj;
     /// <summary>
@@ -332,7 +279,7 @@ public class GameController : MonoBehaviour {
     private void ResetAllGrid() {
         grid = new Grid[9];
         for(int i = 0; i < ball; ++i)
-            grid[i] = new Grid(false, false);
+            grid[i] = new Grid();
     }
 
     /// <summary>
