@@ -22,7 +22,6 @@ public class BallSpawn : MonoBehaviour {
         mainCamera = Camera.main.transform;
         playerPosition = transform.position;
         playerRotation = transform.rotation;
-        GameController.Instance.randomCtrl.GeneratorRandom();
     }
 
     void Update() {

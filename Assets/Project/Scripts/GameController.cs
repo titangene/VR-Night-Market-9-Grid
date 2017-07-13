@@ -194,6 +194,7 @@ public class GameController : MonoBehaviour {
         Switch_GameOver_Panel(false);   // 關閉 GameOver Panel
         timer.ResetTimer();             // 重設 碼表：紀錄每回合總投球時間
         StartCoroutine(prepareTimer.Start_PrepareTimer());  // 開始準備時間
+        randomCtrl.GeneratorRandom();   // 產生新的亂數 value
         Debug.Log("ResetGame");
     }
 
