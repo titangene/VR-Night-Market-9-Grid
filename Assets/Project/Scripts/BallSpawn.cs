@@ -54,7 +54,9 @@ public class BallSpawn : MonoBehaviour {
     /// </summary>
     private void ThrowBall() {
         ball_RB = ball_Obj.GetComponent<Rigidbody>();
+#if !UNITY_EDITOR
         throw_Power = GameController.Instance.randomCtrl.GetRandom(6, 12);
+#endif
         ball_RB.velocity = mainCamera.forward * throw_Power;
     }
 }

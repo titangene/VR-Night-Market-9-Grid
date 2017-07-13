@@ -278,7 +278,6 @@ public class GameController : MonoBehaviour {
     /// <summary>
     /// 設定 該球物件的編號
     /// </summary>
-    /// <returns></returns>
     public string Set_BallID() {
         return "Ball(Clone)_" + (ball_Count + 1);
     }

@@ -30,10 +30,10 @@ public class GridController : MonoBehaviour {
     /// </summary>
     private void TurnGrid() {
         if (GameController.Instance.Get_GridIsTurn(gridObj_ID)) {
-            if (transform.rotation.x > 80)  // 轉到 80 度時停止翻轉
+            if (transform.eulerAngles.x > 80)   // 翻轉到 80 度時停止翻轉
                 GameController.Instance.Set_GridIsTurn(gridObj_ID, false);
             else    // 平滑翻轉到約 90 度
-                transform.rotation = Quaternion.Lerp(transform.rotation, 
+                transform.rotation = Quaternion.Lerp(transform.rotation,
                     GameController.Instance.gridTurnRotation,
                         Time.deltaTime * GameController.Instance.gridRotationSpeed);
         }
