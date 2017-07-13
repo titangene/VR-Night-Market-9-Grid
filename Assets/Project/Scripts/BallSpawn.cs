@@ -25,18 +25,11 @@ public class BallSpawn : MonoBehaviour {
     }
 
     void Update() {
-        if (CanThrowBall_And_hasBall_OnClickThrowBall()) {
+        if (IsClickDownGVRBtn()) {
             GenerateBall();
             ThrowBall();
             GameController.Instance.UpdateBall();
         }
-    }
-
-    /// <summary>
-    /// 如果可以投球 且 還有剩球時，按下 Cardboard 按鈕 : true
-    /// </summary>
-    private bool CanThrowBall_And_hasBall_OnClickThrowBall() {
-        return (GameController.Instance.canThrowBall && hasBall()) && IsClickDownGVRBtn();
     }
 
     /// <summary>
@@ -56,13 +49,6 @@ public class BallSpawn : MonoBehaviour {
         throw_Power = GameController.Instance.randomCtrl.GetRandom(6, 12);
 #endif
         ball_RB.velocity = mainCamera.forward * throw_Power;
-    }
-
-    /// <summary>
-    /// 是否還有剩球
-    /// </summary>
-    private bool hasBall() {
-        return GameController.Instance.ball > 0;
     }
 
     /// <summary>

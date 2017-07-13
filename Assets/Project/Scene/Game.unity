@@ -687,7 +687,6 @@ MonoBehaviour:
   _ball: 9
   gridTurnRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
   gridRotationSpeed: 1.7
-  canThrowBall: 0
   timer: {fileID: 0}
   balls: 000000000000000000000000000000000000000000000000000000000000000000000000
   ball_Count: 0

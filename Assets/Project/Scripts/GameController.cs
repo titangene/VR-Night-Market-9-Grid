@@ -32,10 +32,6 @@ public class GameController : MonoBehaviour {
     /// </summary>
     public float gridRotationSpeed = 1.7f;
     /// <summary>
-    /// 是否可以投球
-    /// </summary>
-    public bool canThrowBall = false;
-    /// <summary>
     /// 亂數
     /// </summary>
     public RandomController randomCtrl = new RandomController();
@@ -47,6 +43,10 @@ public class GameController : MonoBehaviour {
     /// 碼表：紀錄每回合總投球時間
     /// </summary>
     public Timer timer;
+    /// <summary>
+    /// 投球 Script
+    /// </summary>
+    private BallSpawn ballSpawn;
     
     /// <summary>
     /// 所有球的狀態：無、空中、打中、沒中
@@ -99,6 +99,7 @@ public class GameController : MonoBehaviour {
         Initial_Set_GridObjsToArray();
         prepareTimer = gameObject.GetComponent<PrepareTimer>();
         timer = gameObject.GetComponent<Timer>();
+        ballSpawn = GameObject.FindGameObjectWithTag("Player").GetComponent<BallSpawn>();
     }
 
     void Start() {
@@ -121,14 +122,15 @@ public class GameController : MonoBehaviour {
     /// 開始遊戲：可開始投球
     /// </summary>
     public void StartGame() {
-        canThrowBall = true;
+        Switch_BallSpawn_Script(true);  // 開啟 投球 Script
+        Debug.Log("StartGame");
     }
 
     /// <summary>
     /// 重設遊戲：分數、球數、分數文字、球數文字、關閉 GameOver Panel
     /// </summary>
     public void ResetGame() {
-        canThrowBall = false;           // 設定 不可投球
+        Switch_BallSpawn_Script(false); // 關閉 投球 Script
         score = 0;                      // 重設 分數
         ball = 9;                       // 重設 球數
         _ball = 9;                      // 重設 球數 (延遲版)
@@ -161,8 +163,10 @@ public class GameController : MonoBehaviour {
         ball--;                         // 球數 - 1
         ball_Count++;                   // 投出第幾顆球 + 1
         Set_BallText();                 // 更新球數
-        if (ball == 0)                  // 如果沒球時，延遲 2 秒後開啟 GameOver Panel
+        if (ball == 0) {                // 如果沒球時，延遲 2 秒後開啟 GameOver Panel
+            Switch_BallSpawn_Script(false);  // 關閉 投球 Script
             Invoke("GameOver", 2);
+        }
     }
 
     private void Set_BallText() {
@@ -186,6 +190,13 @@ public class GameController : MonoBehaviour {
     /// </summary>
     public void Switch_GameOver_Panel(bool isHit) {
         GameOverObj.SetActive(isHit);
+    }
+
+    /// <summary>
+    /// 開啟 / 關閉 投球 Script
+    /// </summary>
+    public void Switch_BallSpawn_Script(bool b_switch) {
+        ballSpawn.enabled = b_switch;
     }
 
     /// <summary>
