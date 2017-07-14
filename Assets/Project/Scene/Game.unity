@@ -252,12 +252,12 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114686541618354258, guid: 4de1d1e01802cfd4b8210dc8695a371d,
+    - target: {fileID: 114946089206901568, guid: 4de1d1e01802cfd4b8210dc8695a371d,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 743165261}
-    - target: {fileID: 114946089206901568, guid: 4de1d1e01802cfd4b8210dc8695a371d,
+    - target: {fileID: 114686541618354258, guid: 4de1d1e01802cfd4b8210dc8695a371d,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -682,14 +682,8 @@ MonoBehaviour:
   GameOverObj: {fileID: 1101483991}
   BallText: {fileID: 813381461}
   ScoreText: {fileID: 700293723}
-  score: 0
-  ball: 9
-  _ball: 9
-  gridTurnRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
   gridRotationSpeed: 1.7
-  timer: {fileID: 0}
-  balls: 000000000000000000000000000000000000000000000000000000000000000000000000
-  ball_Count: 0
+  gridTurnRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
 --- !u!4 &1914588320
 Transform:
   m_ObjectHideFlags: 0
@@ -728,7 +722,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1853128804}
-  isTimerRun: 0
 --- !u!1 &2002547314
 GameObject:
   m_ObjectHideFlags: 0

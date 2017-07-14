@@ -1,5 +1,7 @@
 ﻿public class RandomController {
-    // 亂數 value
+    /// <summary>
+    /// 亂數 value
+    /// </summary>
     public System.Random random;
 
     /// <summary>
@@ -14,7 +16,7 @@
     /// <summary>
     /// 產生新的 min ~ max 範圍亂數
     /// </summary>
-    public int GetRandom(int min, int max) {
+    public int Get_Random(int min, int max) {
         return random.Next(min, max + 1);
     }
 }

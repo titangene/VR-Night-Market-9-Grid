@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour {
     /// <summary>
     /// 碼表是否正在跑
     /// </summary>
-    public bool isTimerRun = false;
+    private bool isTimerRun = false;
     /// <summary>
     /// 目前時間字串 (已自訂格式)
     /// </summary>

@@ -36,6 +36,6 @@ public class BallRotation : MonoBehaviour {
     }
 
     private float GetRandom() {
-        return GameController.Instance.randomCtrl.GetRandom(minRandomAngle, maxRandomAngle);
+        return GameController.Instance.Get_Random(minRandomAngle, maxRandomAngle);
     }
 }

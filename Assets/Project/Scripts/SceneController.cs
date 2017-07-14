@@ -8,10 +8,10 @@ public class SceneController : MonoBehaviour {
 
     public void GoHome() {
         Debug.Log("Home");
-		SceneManager.LoadScene("Home");
-	}
+        SceneManager.LoadScene("Home");
+    }
 
-	public void RestartGame() {
-		GameController.Instance.ResetGame();
-	}
+    public void RestartGame() {
+        GameController.Instance.ResetGame();
+    }
 }

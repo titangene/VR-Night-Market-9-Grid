@@ -28,7 +28,7 @@ public class BallSpawn : MonoBehaviour {
         if (IsClickDownGVRBtn()) {
             GenerateBall();
             ThrowBall();
-            GameController.Instance.UpdateBall();
+            GameController.Instance.Update_Ball();
         }
     }
 
@@ -46,7 +46,7 @@ public class BallSpawn : MonoBehaviour {
     private void ThrowBall() {
         ball_RB = ball_Obj.GetComponent<Rigidbody>();
 #if !UNITY_EDITOR
-        throw_Power = GameController.Instance.randomCtrl.GetRandom(6, 12);
+        throw_Power = GameController.Instance.Get_Random(6, 12);
 #endif
         ball_RB.velocity = mainCamera.forward * throw_Power;
     }

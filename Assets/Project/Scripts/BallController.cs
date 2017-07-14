@@ -32,15 +32,9 @@ public class BallController : MonoBehaviour {
         if (IsGrid_CheckTag(collision)) {
             if (GridHasBeenHit(collision) && Equal_BallStatus(BallStatus.Mid_air)) {
                 GameController.Instance.Set_GridIsHit(gridObj_ID, true);
-                GameController.Instance._ball--;    // 更新球數 (延遲版)
-                GameController.Instance.Set_BallStatus_To_Hit(ballID);
-
-                log = System.String.Format("Ball{0} : {1} - 剩 {2} 球 - {3} 分", (ballID + 1),
-                    collision.gameObject.name, GameController.Instance._ball, GameController.Instance.score);
-                Debug.Log(log);     // ballID : gridID - ball - score
-
-                if (GameController.Instance._ball == 0)             // 最後一顆球 Lose 時
-                    GameController.Instance.timer.StopTimer();      // 停止記錄該回合總投球時間
+                GameController.Instance.Set_BallStatus(ballID, BallStatus.Hit);
+                GameController.Instance.Update_Ball_delay();
+                GameController.Instance.PrintLog_BallIsHit_Grid(ballID, collision.gameObject);
             }
         }
     }
@@ -51,15 +45,9 @@ public class BallController : MonoBehaviour {
     private void BallIsHit_OutRange(Collision collision) {
         if (IsOutRange_CheckTag(collision)) {
             if (!Equal_BallStatus(BallStatus.Hit)) {
-                GameController.Instance._ball--;    // 更新球數 (延遲版)
-                GameController.Instance.Set_BallStatus_To_Lose(ballID);
-
-                log = System.String.Format("Ball{0} : Lose  - 剩 {1} 球",
-                    ballID + 1, GameController.Instance._ball);
-                Debug.Log(log);     // ballID : Lose - ball
-
-                if (GameController.Instance._ball == 0)             // 最後一顆球 Lose 時
-                    GameController.Instance.timer.StopTimer();      // 停止記錄該回合總投球時間
+                GameController.Instance.Set_BallStatus(ballID, BallStatus.Lose);
+                GameController.Instance.Update_Ball_delay();
+                GameController.Instance.PrintLog_BallIsHit_OutRange(ballID);
             }
             Destroy(gameObject);  // 刪除超過範圍的球
         }
