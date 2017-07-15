@@ -306,7 +306,7 @@ public class GameController : MonoBehaviour {
     /// </summary>
     private void ResetBall() {
         ball = 9;           // 重設 球數
-        ball_delay = 9;          // 重設 球數 (延遲版)
+        ball_delay = 9;     // 重設 球數 (延遲版)
         ball_Count = 0;     // 重設 投出第幾顆球
         Set_BallText();     // 重設 球數文字
     }
