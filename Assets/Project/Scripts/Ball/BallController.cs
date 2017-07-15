@@ -35,6 +35,7 @@ public class BallController : MonoBehaviour {
                 GameController.Instance.Set_BallStatus(ballID, BallStatus.Hit);
                 GameController.Instance.Update_Ball_delay();
                 GameController.Instance.PrintLog_BallIsHit_Grid(ballID, collision.gameObject);
+                GameController.Instance.WhenNoBall_StopTimer();
             }
         }
     }
@@ -48,6 +49,7 @@ public class BallController : MonoBehaviour {
                 GameController.Instance.Set_BallStatus(ballID, BallStatus.Lose);
                 GameController.Instance.Update_Ball_delay();
                 GameController.Instance.PrintLog_BallIsHit_OutRange(ballID);
+                GameController.Instance.WhenNoBall_StopTimer();
             }
             Destroy(gameObject);  // 刪除超過範圍的球
         }
@@ -79,6 +81,6 @@ public class BallController : MonoBehaviour {
     /// 球的狀態是否等於某狀態
     /// </summary>
     private bool Equal_BallStatus(BallStatus status) {
-        return GameController.Instance.Equal_BallStatus(ballID, status);
+        return GameController.Instance.Compare_BallStatus(ballID, status);
     }
 }

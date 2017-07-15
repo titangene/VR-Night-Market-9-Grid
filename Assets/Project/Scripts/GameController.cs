@@ -115,12 +115,9 @@ public class GameController : MonoBehaviour {
     /// 初始化設定所有宮格物件至 GridObjs 陣列
     /// </summary>
     private void Initial_Set_GridObjsToArray() {
-        // 找出所有有 "Grid" Tag 的物件
-        GameObject[] _GridObjs = GameObject.FindGameObjectsWithTag("Grid");
-        foreach (GameObject GridObj in _GridObjs) {
-            int girdID = get_GirdID(GridObj);
-            GridObjs[girdID] = GridObj;
-        }
+        // 找出所有有 "Grid" Tag 的物件，並排序
+        GridObjs = GameObject.FindGameObjectsWithTag("Grid");
+        System.Array.Sort(GridObjs, (a, b) => a.name.CompareTo(b.name));
     }
 
     /// <summary>
@@ -174,9 +171,7 @@ public class GameController : MonoBehaviour {
     /// 更新球數 (延遲版)
     /// </summary>
     public void Update_Ball_delay() {
-        ball_delay--;           // 設定 球數 (延遲版) - 1
-        if (ball_delay == 0)    // 如果沒球時
-            timer.StopTimer();  // 停止記錄該回合總投球時間
+        ball_delay--;       // 設定 球數 (延遲版) - 1
     }
 
     /// <summary>
@@ -195,6 +190,14 @@ public class GameController : MonoBehaviour {
         string _log = System.String.Format("Ball{0} : Lose  - 剩 {1} 球",
                     ballID + 1, ball_delay);
         Debug.Log(_log);    // ballID : Lose - ball
+    }
+
+    /// <summary>
+    /// 如果沒球時，停止記錄該回合總投球時間
+    /// </summary>
+    public void WhenNoBall_StopTimer() {
+        if (ball_delay == 0)    // 如果沒球時
+            timer.StopTimer();  // 停止記錄該回合總投球時間
     }
 
     private void Set_BallText() {
@@ -290,7 +293,7 @@ public class GameController : MonoBehaviour {
     /// <summary>
     /// 第 i 球的狀態是否 == status
     /// </summary>
-    public bool Equal_BallStatus(int i, BallStatus status) {
+    public bool Compare_BallStatus(int i, BallStatus status) {
         return balls_Status[i] == status;
     }
 
@@ -340,7 +343,7 @@ public class GameController : MonoBehaviour {
     /// </summary>
     private void ResetAllGridObjRotation() {
         foreach (GameObject GridObj in GridObjs)
-            GridObj.transform.rotation = Quaternion.Euler(0, 0, 0);
+            GridObj.transform.rotation = Quaternion.identity;
     }
 
     void OnDestroy() {
