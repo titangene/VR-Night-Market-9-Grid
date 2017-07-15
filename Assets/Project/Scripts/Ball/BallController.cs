@@ -30,7 +30,7 @@ public class BallController : MonoBehaviour {
     /// </summary>
     private void BallIsHit_Grid(Collision collision) {
         if (IsGrid_CheckTag(collision)) {
-            if (GridHasBeenHit(collision) && Equal_BallStatus(BallStatus.Mid_air)) {
+            if (GridHasBeenHit(collision) && Compare_BallStatus(BallStatus.Mid_air)) {
                 GameController.Instance.Set_GridIsHit(gridObj_ID, true);
                 GameController.Instance.Set_BallStatus(ballID, BallStatus.Hit);
                 GameController.Instance.Update_Ball_delay();
@@ -45,7 +45,7 @@ public class BallController : MonoBehaviour {
     /// </summary>
     private void BallIsHit_OutRange(Collision collision) {
         if (IsOutRange_CheckTag(collision)) {
-            if (!Equal_BallStatus(BallStatus.Hit)) {
+            if (!Compare_BallStatus(BallStatus.Hit)) {
                 GameController.Instance.Set_BallStatus(ballID, BallStatus.Lose);
                 GameController.Instance.Update_Ball_delay();
                 GameController.Instance.PrintLog_BallIsHit_OutRange(ballID);
@@ -80,7 +80,7 @@ public class BallController : MonoBehaviour {
     /// <summary>
     /// 球的狀態是否等於某狀態
     /// </summary>
-    private bool Equal_BallStatus(BallStatus status) {
+    private bool Compare_BallStatus(BallStatus status) {
         return GameController.Instance.Compare_BallStatus(ballID, status);
     }
 }
