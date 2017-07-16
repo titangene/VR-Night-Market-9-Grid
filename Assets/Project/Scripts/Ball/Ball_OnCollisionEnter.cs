@@ -3,7 +3,7 @@
 /// <summary>
 /// 偵測球是否打中宮格、是否超過範圍 + Print 投球 Log
 /// </summary>
-public class BallController : MonoBehaviour {
+public class Ball_OnCollisionEnter : MonoBehaviour {
     /// <summary>
     /// 該球的編號
     /// </summary>
