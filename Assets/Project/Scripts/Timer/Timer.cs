@@ -18,25 +18,23 @@ public class Timer : MonoBehaviour {
     /// </summary>
     private string t_str;
     /// <summary>
-    /// 開始時間
+    /// 每回合總投球時間 (s)
     /// </summary>
     private float timer = 0f;
-    // 分, 秒, 毫秒
-    private float t_min, t_sec, t_ms;
+    // 分, 秒
+    private int t_min, t_sec, t_ms;
 
-	void Update () {
+    private System.TimeSpan timeSpan;
+
+    void Update () {
         UpdateTimer();
     }
 
     private void UpdateTimer() {
         if (isTimerRun) {
-            timer += Time.deltaTime;                    // get current time (s)
-            t_min = Mathf.Floor(timer / 60);            // get min
-            t_sec = Mathf.Floor(timer % 60);            // get sec
-            t_ms = Mathf.Floor((timer * 100) % 100);    // get millisec
-            // 70.55s -> 01:10:55
-            t_str = string.Format("{0:00}:{1:00}:{2:00}", t_min, t_sec, t_ms);
-            Set_TimerText(t_str);       // 更新時間文字
+            Get_EachRoundTotalPitchingTime();
+            Format_Timer();
+            Set_TimerText(t_str);
         }
     }
 
@@ -65,9 +63,27 @@ public class Timer : MonoBehaviour {
     }
 
     /// <summary>
+    /// 取得 每回合總投球時間 (s)
+    /// </summary>
+    private void Get_EachRoundTotalPitchingTime() {
+        timer += Time.deltaTime;
+    }
+
+    /// <summary>
+    /// 自訂時間格式
+    /// </summary>
+    private void Format_Timer() {
+        timeSpan = System.TimeSpan.FromSeconds(timer);
+        t_min = timeSpan.Minutes;           // get 分
+        t_sec = timeSpan.Seconds;           // get 秒
+        t_ms = timeSpan.Milliseconds / 10;  // get 毫秒 (傳回值範圍為 -999 ~ 999，所以需 / 10)
+        t_str = string.Format("{0:00}:{1:00}:{2:00}", t_min, t_sec, t_ms);
+    }
+
+    /// <summary>
     /// 設定 碼表時間文字
     /// </summary>
-    public void Set_TimerText(string str) {
+    private void Set_TimerText(string str) {
         timerText.text = str;
     }
 }
