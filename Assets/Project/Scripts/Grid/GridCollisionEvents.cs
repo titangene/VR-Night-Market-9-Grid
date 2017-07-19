@@ -12,12 +12,10 @@ public class GridCollisionEvents : MonoBehaviour {
     }
 
     /// <summary>
-    /// 球打中某宮格時：翻轉該宮格 + 加分
+    /// 球打中某宮格時：翻轉該宮格
     /// </summary>
     void OnCollisionEnter(Collision collision) {
-        if (BallManager.Instance.IsBall_CheckTag(collision.gameObject)) {
+        if (BallManager.Instance.IsBall_CheckTag(collision.gameObject))
             GridManager.Instance.Set_GridIsTurn(gridID, true);
-            ScoreManager.Instance.AddScore();
-        }
     }
 }

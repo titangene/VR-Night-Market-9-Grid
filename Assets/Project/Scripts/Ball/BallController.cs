@@ -32,7 +32,7 @@ public class BallController : Singleton<BallController> {
     }
 
     /// <summary>
-    /// 球打中某宮格：print log
+    /// 球打中某宮格：加分 + print log
     /// </summary>
     public void BallIsHit_Grid(Collision collision, int ballID) {
         if (GridHasBeenHit(collision) &&
@@ -41,6 +41,7 @@ public class BallController : Singleton<BallController> {
             GridManager.Instance.Set_GridIsHit(gridObj_ID, true);
             BallManager.Instance.Set_BallStatus(ballID, BallStatus.Hit);
             BallManager.Instance.Minus_remainingBallNum_hitSome();
+            ScoreManager.Instance.AddScore();
             DebugController.Instance.PrintLog_BallIsHit_Grid(ballID, collision.gameObject);
             WhenNoBall_StopTimer();
         }
