@@ -6,6 +6,10 @@ public class BallController : Singleton<BallController> {
     /// </summary>
     private int gridObj_ID;
 
+    void Awake() {
+        Reload();
+    }
+
     /// <summary>
     /// 當沒球時，關閉 投球 Script
     /// </summary>

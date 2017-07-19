@@ -12,6 +12,7 @@ public class PlayerManager : Singleton<PlayerManager> {
     public float throw_Power = 8.0f;
 
     void Awake() {
+        Reload();
         player.obj = GameObject.FindGameObjectWithTag("Player");
         player.mainCamera = Camera.main.transform;
         player.position = player.obj.transform.position;

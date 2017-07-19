@@ -24,6 +24,10 @@ public class GridManager : Singleton<GridManager> {
     /// </summary>
     public Quaternion gridTurnRotation = Quaternion.Euler(90, 0, 0);
 
+    void Awake() {
+        Reload();
+    }
+
     void Start() {
         Initial_Grid();
     }

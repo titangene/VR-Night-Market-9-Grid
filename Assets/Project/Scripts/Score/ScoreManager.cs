@@ -6,6 +6,10 @@ public class ScoreManager : Singleton<ScoreManager> {
 
     private int score = 0;
 
+    void Awake() {
+        Reload();
+    }
+
     /// <summary>
     /// 取得 分數
     /// </summary>

@@ -11,6 +11,7 @@ public class TimerManager : Singleton<TimerManager> {
     public Timer timer;
 
     void Awake() {
+        Reload();
         prepareTimer = gameObject.GetComponent<PrepareTimer>();
         timer = gameObject.GetComponent<Timer>();
     }

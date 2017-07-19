@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 
 public class OutRangeController : Singleton<OutRangeController> {
+    void Awake() {
+        Reload();
+    }
+
     /// <summary>
     /// 球是否超過範圍
     /// </summary>

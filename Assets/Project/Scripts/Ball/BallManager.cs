@@ -41,6 +41,10 @@ public class BallManager : Singleton<BallManager> {
     /// </summary>
     public int maxRandomAngle = 270;
 
+    void Awake() {
+        Reload();
+    }
+
     void Start() {
         ResetBall();
     }

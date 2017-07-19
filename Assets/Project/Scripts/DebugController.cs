@@ -4,6 +4,10 @@ public class DebugController : Singleton<DebugController> {
     string Log_BallIsHit_Grid = "Ball{0} : {1} - 剩 {2} 球 - {3} 分";
     string Log_BallIsHit_OutRange = "Ball{0} : Lose  - 剩 {1} 球";
 
+    void Awake() {
+        Reload();
+    }
+
     /// <summary>
     /// 球打中宮格時列印 "BallID : GridID - 剩幾球 - 現在幾分"
     /// </summary>

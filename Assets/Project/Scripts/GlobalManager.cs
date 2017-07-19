@@ -6,6 +6,10 @@ public class GlobalManager : Singleton<GlobalManager> {
     /// </summary>
     public RandomController randomCtrl = new RandomController();
 
+    void Awake() {
+        Reload();
+    }
+
     /// <summary>
     /// 產生新的 min ~ max 範圍亂數 (float)
     /// </summary>

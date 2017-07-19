@@ -10,6 +10,10 @@ public class UIController : Singleton<UIController> {
     /// </summary>
     public GameObject GameOverObj;
 
+    void Awake() {
+        Reload();
+    }
+
     /// <summary>
     /// 開啟 / 關閉 準備時間物件
     /// </summary>

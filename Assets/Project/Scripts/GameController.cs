@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 
 public class GameController : Singleton<GameController> {
+    void Awake() {
+        Reload();
+    }
+
     void Start() {
         ResetGame();
     }

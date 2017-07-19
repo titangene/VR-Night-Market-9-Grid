@@ -4,6 +4,10 @@
 /// 球打中某宮格時：翻轉該宮格 + 加分
 /// </summary>
 public class GridController : Singleton<GridController> {
+    void Awake() {
+        Reload();
+    }
+
     /// <summary>
     /// 翻轉該宮格
     /// </summary>

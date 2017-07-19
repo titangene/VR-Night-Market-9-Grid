@@ -4,6 +4,10 @@ public class OutRangeManager : Singleton<OutRangeManager> {
     public string outRangeTag = "OutRange";
     private GameObject[] outRangeObjs;
 
+    void Awake() {
+        Reload();
+    }
+
     void Start() {
         Initial_OutRange();
     }
