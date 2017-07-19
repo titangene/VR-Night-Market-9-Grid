@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GcVR;
+using UnityEngine;
 
 public class PlayerManager : Singleton<PlayerManager> {
     public Player player = new Player();
@@ -11,12 +12,15 @@ public class PlayerManager : Singleton<PlayerManager> {
     /// </summary>
     public float throw_Power = 8.0f;
 
+    public GcVR_Gaze gcVR_Gaze;
+
     void Awake() {
         Reload();
         player.obj = GameObject.FindGameObjectWithTag("Player");
         player.mainCamera = Camera.main.transform;
         player.position = player.obj.transform.position;
         ballSpawn = player.obj.GetComponent<BallSpawn>();
+        gcVR_Gaze = player.mainCamera.GetComponent<GcVR_Gaze>();
     }
 
     /// <summary>

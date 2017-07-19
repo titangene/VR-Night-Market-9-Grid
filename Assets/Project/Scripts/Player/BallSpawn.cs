@@ -5,7 +5,8 @@ public class BallSpawn : MonoBehaviour {
     private Rigidbody ball_RB;
 
     void Update() {
-        if (GlobalManager.Instance.IsClickDownGVRBtn()) {
+        if (GlobalManager.Instance.IsClickDownGVRBtn() && 
+            !PlayerManager.Instance.gcVR_Gaze.IsTargerObj_CheckTag("HomeBtn")) {
             GenerateBall();
             ThrowBall();
             BallManager.Instance.Update_Ball();
