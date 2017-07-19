@@ -1,25 +1,11 @@
 ﻿using UnityEngine;
 
 public class BallRotation : MonoBehaviour {
+    private Rigidbody ball_RB;
     /// <summary>
     /// 旋轉角度
     /// </summary>
     private Vector3 rotationAngle;
-    /// <summary>
-    /// 旋轉角度速度
-    /// </summary>
-    public float rotationSpeed = 1f;
-    /// <summary>
-    /// 最小亂數角度
-    /// </summary>
-    public int minRandomAngle = 50;
-    /// <summary>
-    /// 最大亂數角度
-    /// </summary>
-    public int maxRandomAngle = 270;
-
-    private Rigidbody ball_RB;
-    private Quaternion deltaRotation;
 
     void Awake () {
         ball_RB = gameObject.GetComponent<Rigidbody>();
@@ -30,12 +16,17 @@ public class BallRotation : MonoBehaviour {
         BallRandomRotation();
     }
 
+    /// <summary>
+    /// 球隨機轉
+    /// </summary>
     private void BallRandomRotation() {
-        deltaRotation = Quaternion.Euler(rotationAngle * rotationSpeed * Time.deltaTime);
+        Quaternion deltaRotation = Quaternion.Euler(rotationAngle * 
+            BallManager.Instance.rotationSpeed * Time.deltaTime);
         ball_RB.MoveRotation(ball_RB.rotation * deltaRotation);
     }
 
     private float GetRandom() {
-        return GameController.Instance.Get_Random(minRandomAngle, maxRandomAngle);
+        return GlobalManager.Instance.Get_Random_float(
+            BallManager.Instance.minRandomAngle, BallManager.Instance.maxRandomAngle);
     }
 }

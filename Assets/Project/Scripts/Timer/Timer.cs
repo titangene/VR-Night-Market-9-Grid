@@ -21,7 +21,7 @@ public class Timer : MonoBehaviour {
     /// 每回合總投球時間 (s)
     /// </summary>
     private float timer = 0f;
-    // 分, 秒
+    // 分, 秒, 毫秒
     private int t_min, t_sec, t_ms;
 
     private System.TimeSpan timeSpan;

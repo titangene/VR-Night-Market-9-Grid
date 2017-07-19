@@ -35,9 +35,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
                         Debug.Log("[Singleton] An instance of " + typeof(T) +
                             " is needed in the scene, so '" + singleton +
                             "' was created with DontDestroyOnLoad.");
-                    } else
-                        Debug.Log("[Singleton] Using instance already created: " +
-                            _instance.gameObject.name);
+                    } 
+                    //else
+                    //    Debug.Log("[Singleton] Using instance already created: " +
+                    //        _instance.gameObject.name);
                 }
                 return _instance;
             }
