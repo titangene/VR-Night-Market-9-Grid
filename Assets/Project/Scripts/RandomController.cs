@@ -2,7 +2,7 @@
     /// <summary>
     /// 亂數 value
     /// </summary>
-    public System.Random random;
+    private System.Random random;
 
     /// <summary>
     /// 產生新的亂數 value

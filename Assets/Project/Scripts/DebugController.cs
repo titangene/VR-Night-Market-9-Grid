@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
 public class DebugController : Singleton<DebugController> {
-    string Log_BallIsHit_Grid = "Ball{0} : {1} - 剩 {2} 球 - {3} 分";
-    string Log_BallIsHit_OutRange = "Ball{0} : Lose  - 剩 {1} 球";
+    private string Log_BallIsHit_Grid = "Ball{0} : {1} - 剩 {2} 球 - {3} 分";
+    private string Log_BallIsHit_OutRange = "Ball{0} : Lose  - 剩 {1} 球";
 
     void Awake() {
         Reload();
